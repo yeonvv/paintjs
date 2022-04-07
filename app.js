@@ -40,6 +40,7 @@ function onMouseDown(event) {
 function handleClickColor(event) {
   const color = event.target.style.backgroundColor;
   ctx.strokeStyle = color;
+  ctx.fillStyle = color;
 }
 
 function handleInputRange(event) {
@@ -55,12 +56,17 @@ function handleClickMode(event) {
     mode.innerText = "Paint";
   }
 }
-
+function handleClickCanvas() {
+  if (filling) {
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+}
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("mousedown", startPainting);
   canvas.addEventListener("mouseup", stopPainting);
   canvas.addEventListener("mouseleave", stopPainting);
+  canvas.addEventListener("click", handleClickCanvas);
 }
 
 Array.from(color).forEach((color) =>
